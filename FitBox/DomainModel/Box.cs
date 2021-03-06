@@ -18,33 +18,38 @@ namespace FitBox.DomainModel
         public int Id { private set; get; }
 
         /// <summary>
-        /// length in decimal
+        /// Length in decimal
         /// </summary>
-        public decimal length { set; get; }
+        public decimal Length { set; get; }
 
         /// <summary>
-        /// breath in decimal
+        /// Breath in decimal
         /// </summary>
-        public decimal breath { set; get; }
+        public decimal Breath { set; get; }
 
         /// <summary>
-        /// height in decimal
+        ///Height in decimal
         /// </summary>
-        public decimal height { set; get; }
+        public decimal Height { set; get; }
 
         /// <summary>
         /// Flag to indicate big 
         /// </summary>
-        public bool big { set; get; }
+        public bool Big { set; get; }
 
         /// <summary>
-        /// volume of the box
+        /// Volume of the box
         /// </summary>
-        public decimal volume { set; get; }
+        public decimal Volume { set; get; }
 
         /// <summary>
         /// Type of box
         /// </summary>
         public string Type { set; get; }
+
+        /// <summary>
+        /// Maximum weight it can hold
+        /// </summary>
+        public decimal Weight { set; get; }
     }
 }

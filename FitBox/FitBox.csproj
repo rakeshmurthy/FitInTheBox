@@ -8,6 +8,6 @@
   <ItemGroup>
     <Folder Include="DomainModel\" />
     <Folder Include="Logic\" />
-    <Folder Include="Helper\" />
+    <Folder Include="Service\" />
   </ItemGroup>
 </Project>

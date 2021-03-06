@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using FitBox.DomainModel;
 using FitBox.Helper;
 using FitBox.Logic;
@@ -9,25 +10,23 @@ namespace FitBox
     {
         public static void Main(string[] args)
         {
-            HelpMe.DisplayHeader();
+            Service.DisplayHeader();
 
             // Read measuring unit
-            var unit = Console.ReadLine();
+            (string dimension,string mass) = Service.CollectUnitOfMeasurmentInformation();
 
             //Read boxes information
-            var boxOne = HelpMe.CollectBoxInfo(new Box(1), unit);
-            var boxTwo = HelpMe.CollectBoxInfo(new Box(2), unit);
+            (Box boxOne,Box boxTwo) = Service.CollectBoxesInfo(2, dimension, mass);
 
             //Process the boxes
             var processBox = new FitBoxProcess();
-            processBox.AnaylseBoxes(boxOne, boxTwo);
-            var numberOfBoxes = processBox.NumberOfBoxesThatFits(boxOne, boxTwo);
+            var bigBox = processBox.AnaylseBoxes(boxOne, boxTwo);
+            var totalNumberOfBoxes = processBox.NumberOfBoxesThatFits(boxOne, boxTwo);
+            var totalWeight = processBox.CalculateTotalWeight(totalNumberOfBoxes, boxOne, boxTwo);
 
             //Display information of boxes and results
-            HelpMe.DisplayBoxInformation(boxOne, unit);
-            HelpMe.DisplayBoxInformation(boxTwo, unit);
-            Console.WriteLine($"Conclusion: \n " +
-                              $"Atleast {numberOfBoxes} boxes fit in other box");
+            Service.DisplayBoxInformation(new List<Box> { boxOne, boxTwo }, dimension, mass);
+            Service.DisplayConclusion(bigBox, totalNumberOfBoxes, totalWeight, mass);
 
             Console.ReadLine();
         }

@@ -12,9 +12,11 @@ namespace FitBox.Logic
         /// </summary>
         /// <param name="boxOne"></param>
         /// <param name="boxTwo"></param>
-        public void AnaylseBoxes(Box boxOne, Box boxTwo)
+        public int AnaylseBoxes(Box boxOne, Box boxTwo)
         {
-            var _ = CalculateVolumeOfBox(boxOne).volume > CalculateVolumeOfBox(boxTwo).volume ? (boxOne.big = true) : (boxTwo.big = false);
+            var _ = CalculateVolumeOfBox(boxOne).Volume > CalculateVolumeOfBox(boxTwo).Volume ? (boxOne.Big = true) : (boxTwo.Big = false);
+
+            return boxOne.Big ? boxOne.Id : boxTwo.Id;
         }
 
         /// <summary>
@@ -25,8 +27,8 @@ namespace FitBox.Logic
         /// <param name="box"></param>
         private Box CalculateVolumeOfBox(Box box)
         {
-            box.Type = (box.length == box.breath && box.breath == box.height) ? "Square box" : "Rectangular box";
-            box.volume = (box.length * box.breath * box.height);
+            box.Type = (box.Length == box.Breath && box.Breath == box.Height) ? "Square box" : "Rectangular box";
+            box.Volume = (box.Length * box.Breath * box.Height);
             return box;
         }
 
@@ -41,16 +43,36 @@ namespace FitBox.Logic
         public decimal NumberOfBoxesThatFits(Box boxOne, Box boxTwo)
         {
             // Default: assumption boxOne is bigger
-            decimal nominator = boxOne.volume;
-            decimal denominator = boxTwo.volume;
+            decimal nominator = boxOne.Volume;
+            decimal denominator = boxTwo.Volume;
 
-            if (!boxOne.big)
+            if (!boxOne.Big)
             {
-                nominator = boxTwo.volume;
-                denominator = boxOne.volume;
+                nominator = boxTwo.Volume;
+                denominator = boxOne.Volume;
             }
 
             return Convert.ToDecimal(Math.Floor(nominator / denominator));
+        }
+
+        /// <summary>
+        /// Calculates total weight of the box
+        /// </summary>
+        /// <param name="totalNumberOfBoxes"></param>
+        /// <param name="boxOne"></param>
+        /// <param name="boxTwo"></param>
+        /// <returns></returns>
+        public decimal CalculateTotalWeight(decimal totalNumberOfBoxes, Box boxOne, Box boxTwo)
+        {
+            // Default: assumption boxTwo is smaller
+            decimal totalWeight = (boxTwo.Weight * totalNumberOfBoxes) + boxOne.Weight;
+
+            if (boxTwo.Big)
+            {
+                totalWeight = (boxOne.Weight * totalNumberOfBoxes) + boxTwo.Weight;
+            }
+
+            return totalWeight;
         }
     }
 }
