@@ -107,7 +107,7 @@ namespace FitBox.Helper
         {
             Console.WriteLine($"Conclusion: \n" +
                               $"Box number : {bigBox} is bigger box among the two boxes. \n" +
-                              $"Atleast {numberOfBoxes} boxes fit in other box. \n" +
+                              $"{numberOfBoxes} boxes fit in other box. \n" +
                               $"Final weight of bigger box containing small boxes will be {totalWeight} {mass}");
         }
     }
