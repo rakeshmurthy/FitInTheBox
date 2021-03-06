@@ -1,7 +1,7 @@
 # MyRoehling
 TestProjects
 
-Project: FitTheBox
+Project: FitBox
 
 Berechnung von zwei Kartons welche ineinander passen sollen.
  
